@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dialog_workspace/widgets/dialog_stack.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'widgets/dialog_stack.dart';
 import 'home_page.dart';
 
 void main() {
