@@ -7,7 +7,8 @@
     {
       "name": "flutter_dialog_workspace",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "args": ["-d", "macos"]
     },
     {
       "name": "flutter_dialog_workspace (profile mode)",
