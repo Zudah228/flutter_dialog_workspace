@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
-const dialogDuration = Duration(milliseconds: 100);
+const defaultDialogDuration = Duration(milliseconds: 100);
+const defaultDialogBarrieColor = Colors.black54;
 
 class DialogBarrier extends StatefulWidget {
   const DialogBarrier({
     super.key,
     required this.child,
-    required this.isShow,
+    required this.visible,
     required this.hide,
     this.barrierDismissible = true,
-    this.duration = dialogDuration,
+    this.duration = defaultDialogDuration,
   });
 
-  final bool isShow;
+  final bool visible;
   final VoidCallback? hide;
   final Widget child;
   final bool barrierDismissible;
@@ -35,22 +36,21 @@ class _DialogBarrierState extends State<DialogBarrier> {
   void didUpdateWidget(covariant DialogBarrier oldWidget) {
     _child = widget.child;
 
-    // isShow に変化があった場合の発火
-    if (oldWidget.isShow != widget.isShow) {
-
+    // visible に変化があった場合の発火
+    if (oldWidget.visible != widget.visible) {
       // 削除されるときに値をリセットした場合、dispose アニメーション中には以前の widget を表示しておく。
-      if (!widget.isShow) {
+      if (!widget.visible) {
         _child = oldWidget.child;
       }
-      
+
       Future(() async {
-        if (widget.isShow) {
+        if (widget.visible) {
           await _animationWidgetKey.currentState?.forward();
         } else {
           await _animationWidgetKey.currentState?.reverse();
         }
         setState(() {
-          _visible = widget.isShow;
+          _visible = widget.visible;
         });
       });
     }
@@ -68,7 +68,7 @@ class _DialogBarrierState extends State<DialogBarrier> {
           child: GestureDetector(
             onTap: widget.barrierDismissible ? widget.hide : null,
             child: ColoredBox(
-              color: Colors.black26,
+              color: defaultDialogBarrieColor,
               child: GestureDetector(
                 // onTap ジェスチャーの上書き
                 onTap: () {},

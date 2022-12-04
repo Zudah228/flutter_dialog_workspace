@@ -3,11 +3,10 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'widgets/dialog_stack.dart';
+import 'widgets/dialog_systems/dialog_systems.dart';
 
 class MyHomePage extends ConsumerStatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   ConsumerState<MyHomePage> createState() => _MyHomePageState();
@@ -19,15 +18,16 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   void _incrementCounter() async {
     ref.showLoadingIndicator();
     await Future.delayed(const Duration(seconds: 1));
-    setState(() {
-      _counter++;
-    });
     ref.hideLoadingIndicator();
 
-    final isError = math.Random().nextInt(2) == 0;
+    final isError = math.Random().nextInt(4) == 0;
     if (isError) {
-    ref.showErrorDialog(
-        title: 'エラーが発生しました', description: 'このエラーは 1/3 の確率で発生します。');
+      ref.showErrorDialog(
+          title: 'エラーが発生しました', description: 'このエラーは 1/4 の確率で発生します。');
+    } else {
+      setState(() {
+        _counter++;
+      });
     }
   }
 
@@ -35,7 +35,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('No Navigator Dialog'),
       ),
       body: Center(
         child: Column(

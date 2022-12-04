@@ -5,22 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "flutter_dialog_workspace",
+      "name": "run",
       "request": "launch",
       "type": "dart",
-      "args": ["-d", "macos"]
     },
     {
-      "name": "flutter_dialog_workspace (profile mode)",
+      "name": "macos",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile"
     },
     {
-      "name": "flutter_dialog_workspace (release mode)",
+      "name": "web",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release"
+      "args": ["-d", "chrome", "--web-renderer", "html"]
     }
   ]
 }

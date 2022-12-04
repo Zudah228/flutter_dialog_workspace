@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../dialog_stack.dart';
-import 'dialog_barrier.dart';
+import 'barrier_widgets/dialog_barrier.dart';
+import '../dialog_state_provider.dart';
 
 class ErrorDialog extends ConsumerWidget {
   const ErrorDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isShow =
+    final visible =
         ref.watch(dialogStateProvider.select((value) => value.showError));
     final title =
         ref.watch(dialogStateProvider.select((value) => value.errorTitle));
@@ -17,7 +17,7 @@ class ErrorDialog extends ConsumerWidget {
         .watch(dialogStateProvider.select((value) => value.errorDescription));
 
     return DialogBarrier(
-      isShow: isShow,
+      visible: visible,
       hide: ref.hideErrorDialog,
       barrierDismissible: true,
       child: AlertDialog(
